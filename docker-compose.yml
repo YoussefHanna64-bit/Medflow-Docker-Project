@@ -1,0 +1,22 @@
+services:
+  backend:
+    image: azouz08/medflow-backend:latest
+    container_name: medflow_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URL=mongodb://youssefhanna223175_db_user:kRJ1WM26v4DAp6r6@ac-q56bvx8-shard-00-00.hfej9f0.mongodb.net:27017,ac-q56bvx8-shard-00-01.hfej9f0.mongodb.net:27017,ac-q56bvx8-shard-00-02.hfej9f0.mongodb.net:27017/MedFlowDB?ssl=true&replicaSet=atlas-u93b97-shard-0&authSource=admin&appName=MedFlow
+      - JWT_SECRET=THIS_IS_THE_WORST_SECRET_KEY_EVER
+      - JWT_EXPIRE=1h
+      - STRIPE_SECRET_KEY=sk_test_51TWiyk2dNszOOgy0WJ1A73dMpwIPbe0rBpxq4fPFD056aU8YUor18hnJoNWD8jsfC58ezLveoL9cxfVH3AkhCpqh00iBQCjQT3
+      - HF_TOKEN=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
+      - GEMINI_API_KEY=AQ.Ab8RN6Iqrs6WO9UXBtgU_i3LPpVqwCBLQL-109qaE0silIKlPQ
+
+  frontend:
+    image: azouz08/medflow-frontend:latest
+    container_name: medflow_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
